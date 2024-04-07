@@ -28,8 +28,8 @@ class Url(models.Model):
         return super().save(*args, **kwargs)
 
 
-# class ClickStats(models.Model):
-#     url = models.ForeignKey(Url, on_delete=models.CASCADE)
-#     click_time = models.DateTimeField(auto_now_add=True)
-#     country_code = models.CharField(max_length=3, blank=True, null=True)
-#     user_agent = models.TextField(blank=True, null=True)
+class ClickStats(models.Model):
+    url = models.ForeignKey(Url, on_delete=models.CASCADE)
+    click_time = models.DateTimeField(auto_now_add=True)
+    country_code = models.CharField(max_length=3, blank=True, null=True)
+    user_agent = models.TextField(blank=True, null=True)
