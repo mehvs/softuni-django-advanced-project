@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import hello_world_view
+from .views import Index, CreateShortUrl, redirect_to_original
 
 urlpatterns = [
 
-    path('', hello_world_view, name='hello_world'),
+    path('', CreateShortUrl.as_view(), name='shortener'),
+    path('<str:short_code>/', redirect_to_original, name='redirect'),
 
 ]
