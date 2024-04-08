@@ -33,3 +33,4 @@ class ClickStats(models.Model):
     click_time = models.DateTimeField(auto_now_add=True)
     country_code = models.CharField(max_length=3, blank=True, null=True)
     user_agent = models.TextField(blank=True, null=True)
+    click_count = models.IntegerField(default=0, blank=False, null=False)
