@@ -10,6 +10,15 @@ def generate_short_code():
     return short_code
 
 
+REASON_CHOICES = (
+    ("spam", "Spam"),
+    ("phishing", "Phishing"),
+    ("scam", "Scam"),
+    ("malicious", "Malicious"),
+    ("other", "Other"),
+)
+
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -34,3 +43,16 @@ class ClickStats(models.Model):
     country_code = models.CharField(max_length=3, blank=True, null=True)
     user_agent = models.TextField(blank=True, null=True)
     click_count = models.IntegerField(default=0, blank=False, null=False)
+
+
+class Report(models.Model):
+    date_of_report = models.DateTimeField(auto_now_add=True)
+    suspected_link = models.URLField()
+    reason = models.CharField(blank=False, null=False, choices=REASON_CHOICES, max_length=20)
+    additional_notes = models.TextField(blank=True, null=True)
+
+
+class Support(models.Model):
+    subject = models.CharField(max_length=255, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
+    description = models.TextField(blank=False, null=False)
