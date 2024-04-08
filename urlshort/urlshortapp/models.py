@@ -51,3 +51,8 @@ class Report(models.Model):
     reason = models.CharField(blank=False, null=False, choices=REASON_CHOICES, max_length=20)
     additional_notes = models.TextField(blank=True, null=True)
 
+
+class Support(models.Model):
+    subject = models.CharField(max_length=255, blank=False, null=False)
+    email = models.EmailField(blank=False, null=False)
+    description = models.TextField(blank=False, null=False)
