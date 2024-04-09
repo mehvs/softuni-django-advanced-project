@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView
 from django.urls import reverse_lazy
 from .models import Url
-from .forms import ShortenerForm
+from .forms import ShortenerForm, LoginForm
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -28,3 +33,11 @@ class CreateShortUrl(CreateView):
         form.instance.user = self.request.user
         form.instance.short_code = Url.short_code
         return super(CreateShortUrl, self).form_valid(form)
+
+
+class CustomLoginView(LoginView):
+    template_name = 'urlshortapp/login.html'
+    form_class = LoginForm
+
+    def get_success_url(self):
+        return reverse_lazy('shortener')
