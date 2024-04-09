@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView
 from django.urls import reverse_lazy
 from .models import Url
+from .forms import ShortenerForm
 
 # Create your views here.
 
@@ -20,7 +21,7 @@ class Index(TemplateView):
 class CreateShortUrl(CreateView):
     model = Url
     template_name = "urlshortapp/shortener.html"
-    fields = ['original_url']
+    form_class = ShortenerForm
     success_url = reverse_lazy('shortener')
 
     def form_valid(self, form):
