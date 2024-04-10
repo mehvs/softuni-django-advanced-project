@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    {% for report in reports %}
+    <tr>
+        <td>{{ report.id }} | {{ report.date_of_report }} | {{ report.suspected_link }} | {{ report.reason }} | {{ report.additional_notes }}</td>
+        <td><a href="">View</a></td>
+        <td><a href="">Edit</a></td>
+        <td><a href="">Delete</a></td>
+    </tr>
+    {% empty %}
+        <h3>No items in list</h3>
+    {% endfor %}
+</table>

@@ -115,3 +115,8 @@ class CreateReportView(CreateView):
     form_class = ReportForm
     success_url = reverse_lazy('report-create')
 
+
+class ListReportView(ListView):
+    model = Report
+    context_object_name = 'reports'
+
