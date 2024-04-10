@@ -140,9 +140,9 @@ class CreateSupportView(CreateView):
     success_url = reverse_lazy('support-create')
 
 
-# class ListReportView(ListView):
-#     model = Report
-#     context_object_name = 'reports'
+class ListSupportView(ListView):
+    model = Support
+    context_object_name = 'support_tickets'
 #
 #
 # class ReportUpdateView(UpdateView):

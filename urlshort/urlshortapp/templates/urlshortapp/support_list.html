@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+        <th></th>
+    </tr>
 
-</body>
-</html>
+    {% for ticket in support_tickets %}
+    <tr>
+        <td>{{ ticket.id }} | {{ ticket.subject }} | {{ ticket.email }} | {{ ticket.description }} | {{ ticket.status }}</td>
+        <td><a href="">Edit</a></td>
+        <td><a href="">Delete</a></td>
+    </tr>
+    {% empty %}
+        <h3>No items in list</h3>
+    {% endfor %}
+</table>
