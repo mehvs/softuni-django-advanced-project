@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from .models import Url, ClickStats, Report, Support
-from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm
+from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -120,3 +120,8 @@ class ListReportView(ListView):
     model = Report
     context_object_name = 'reports'
 
+
+class ReportUpdateView(UpdateView):
+    model = Report
+    form_class = ReportUpdateForm
+    success_url = reverse_lazy('report-list')

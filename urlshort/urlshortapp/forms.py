@@ -24,3 +24,9 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ['suspected_link', 'reason', 'additional_notes']
+
+
+class ReportUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = "__all__"
