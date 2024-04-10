@@ -36,3 +36,9 @@ class SupportForm(forms.ModelForm):
     class Meta:
         model = Support
         fields = ['subject', 'email', 'description']
+
+
+class SupportUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Support
+        fields = "__all__"

@@ -8,7 +8,7 @@
     {% for ticket in support_tickets %}
     <tr>
         <td>{{ ticket.id }} | {{ ticket.subject }} | {{ ticket.email }} | {{ ticket.description }} | {{ ticket.status }}</td>
-        <td><a href="">Edit</a></td>
+        <td><a href="{% url 'support-update' ticket.id %}">Edit</a></td>
         <td><a href="">Delete</a></td>
     </tr>
     {% empty %}

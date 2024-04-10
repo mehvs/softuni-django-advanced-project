@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import CreateShortUrl, redirect_to_original, CustomLoginView, RegisterView, UrlListView, \
     UrlDetailView, UrlUpdateView, UrlDeleteView, CreateReportView, ListReportView, ReportUpdateView, ReportDeleteView, \
-    CreateSupportView, ListSupportView
+    CreateSupportView, ListSupportView, SupportUpdateView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
 
     path('support-create/', CreateSupportView.as_view(), name='support-create'),
     path('support-list/', ListSupportView.as_view(), name='support-list'),
+    path('support-update/<int:pk>/', SupportUpdateView.as_view(), name='support-update'),
 
     path('<str:short_code>/', redirect_to_original, name='redirect'),
 
