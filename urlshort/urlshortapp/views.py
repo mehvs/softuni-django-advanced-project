@@ -3,8 +3,8 @@ import requests
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from .models import Url, ClickStats
-from .forms import ShortenerForm, LoginForm, RegisterForm
+from .models import Url, ClickStats, Report, Support
+from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -107,3 +107,11 @@ class UrlDeleteView(DeleteView):
     model = Url
     context_object_name = 'url'
     success_url = reverse_lazy('urls')
+
+
+class CreateReportView(CreateView):
+    model = Report
+    template_name = "urlshortapp/report_create.html"
+    form_class = ReportForm
+    success_url = reverse_lazy('report-create')
+

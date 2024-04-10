@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import Index, CreateShortUrl, redirect_to_original, CustomLoginView, RegisterView, UrlListView, \
-    UrlDetailView, UrlUpdateView, UrlDeleteView
+from .views import CreateShortUrl, redirect_to_original, CustomLoginView, RegisterView, UrlListView, \
+    UrlDetailView, UrlUpdateView, UrlDeleteView, CreateReportView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -14,6 +14,10 @@ urlpatterns = [
     path('url/<int:pk>/', UrlDetailView.as_view(), name='url'),
     path('url-update/<int:pk>/', UrlUpdateView.as_view(), name='url-update'),
     path('url-delete/<int:pk>/', UrlDeleteView.as_view(), name='url-delete'),
+
+    path('report-create/', CreateReportView.as_view(), name='report-create'),
+
+
 
 
 
