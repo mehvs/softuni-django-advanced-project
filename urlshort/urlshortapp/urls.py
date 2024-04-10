@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import CreateShortUrl, redirect_to_original, CustomLoginView, RegisterView, UrlListView, \
-    UrlDetailView, UrlUpdateView, UrlDeleteView, CreateReportView, ListReportView, ReportUpdateView
+    UrlDetailView, UrlUpdateView, UrlDeleteView, CreateReportView, ListReportView, ReportUpdateView, ReportDeleteView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -18,10 +18,7 @@ urlpatterns = [
     path('report-create/', CreateReportView.as_view(), name='report-create'),
     path('report-list/', ListReportView.as_view(), name='report-list'),
     path('report-update/<int:pk>/', ReportUpdateView.as_view(), name='report-update'),
-
-
-
-
+    path('report-delete/<int:pk>/', ReportDeleteView.as_view(), name='report-delete'),
 
     path('<str:short_code>/', redirect_to_original, name='redirect'),
 

@@ -125,3 +125,10 @@ class ReportUpdateView(UpdateView):
     model = Report
     form_class = ReportUpdateForm
     success_url = reverse_lazy('report-list')
+
+
+class ReportDeleteView(DeleteView):
+    model = Report
+    context_object_name = 'report'
+    success_url = reverse_lazy('report-list')
+
