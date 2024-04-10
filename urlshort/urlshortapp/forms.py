@@ -23,4 +23,4 @@ class RegisterForm(UserCreationForm):
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = "__all__"
+        fields = ['suspected_link', 'reason', 'additional_notes']
