@@ -1,7 +1,9 @@
+import requests
+
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView, CreateView, ListView
+from django.views.generic import TemplateView, FormView, CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from .models import Url
+from .models import Url, ClickStats
 from .forms import ShortenerForm, LoginForm, RegisterForm
 
 from django.contrib.auth.views import LoginView
@@ -16,6 +18,26 @@ from django.http import HttpResponse
 
 def redirect_to_original(request, short_code):
     url = Url.objects.get(short_code=short_code)
+    url.click_count += 1
+
+    user_agent = request.META.get('HTTP_USER_AGENT', '')
+
+    user_ip = request.META.get('REMOTE_ADDR')
+
+    response = requests.get(f'https://ipinfo.io/{user_ip}/country')
+
+    country_code = ''
+    if '400' in response.text.strip():
+        country_code = 'n/a'
+    else:
+        country_code = response.text.strip()
+
+    print(country_code)
+
+    click_stats = ClickStats.objects.create(url_id=url.id, user_agent=user_agent, country_code=country_code)
+
+    click_stats.save()
+    url.save()
     return redirect(url.original_url)
 
 
@@ -64,3 +86,9 @@ class RegisterView(FormView):
 class UrlListView(ListView):
     model = Url
     context_object_name = 'urls'
+
+
+class UrlDetailView(DetailView):
+    model = Url
+    context_object_name = 'url'
+

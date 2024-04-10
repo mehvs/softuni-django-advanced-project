@@ -8,7 +8,7 @@
     {% for url in urls %}
     <tr>
         <td><a href="http://127.0.0.1:8000/{{ url.short_code }}">http://127.0.0.1:8000/{{ url.short_code }}</a> </td>
-        <td><a href="">View</a></td>
+        <td><a href="{% url 'url' url.id %}">View</a></td>
         <td><a href="">Edit</a></td>
         <td><a href="">Delete</a></td>
     </tr>
