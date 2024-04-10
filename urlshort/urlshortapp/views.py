@@ -92,3 +92,22 @@ class UrlDetailView(DetailView):
     model = Url
     context_object_name = 'url'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        url = self.get_object()
+        click_stats = url.clickstats_set.all()  # Assuming the related_name is 'childmodel_set'
+        context['click_stats'] = click_stats
+        return context
+
+
+class UrlUpdateView(UpdateView):
+    model = Url
+    form_class = ShortenerForm
+    success_url = reverse_lazy('urls')
+
+
+# class TaskDelete(LoginRequiredMixin, DeleteView):
+#     model = Task
+#     context_object_name = 'task'
+#     success_url = reverse_lazy('tasks')
