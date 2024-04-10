@@ -107,7 +107,7 @@ class UrlUpdateView(UpdateView):
     success_url = reverse_lazy('urls')
 
 
-# class TaskDelete(LoginRequiredMixin, DeleteView):
-#     model = Task
-#     context_object_name = 'task'
-#     success_url = reverse_lazy('tasks')
+class UrlDeleteView(DeleteView):
+    model = Url
+    context_object_name = 'url'
+    success_url = reverse_lazy('urls')
