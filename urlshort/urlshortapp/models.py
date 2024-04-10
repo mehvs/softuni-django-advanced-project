@@ -18,6 +18,13 @@ REASON_CHOICES = (
     ("other", "Other"),
 )
 
+STATUS_CHOICES = (
+    ("open", "Open"),
+    ("pending", "Pending"),
+    ("resolved", "Resolved"),
+    ("closed", "Closed"),
+)
+
 
 # Create your models here.
 
@@ -50,6 +57,7 @@ class Report(models.Model):
     suspected_link = models.URLField()
     reason = models.CharField(blank=False, null=False, choices=REASON_CHOICES, max_length=20)
     additional_notes = models.TextField(blank=True, null=True)
+    status = models.CharField(blank=False, null=False, default='Open', choices=STATUS_CHOICES, max_length=20)
 
 
 class Support(models.Model):

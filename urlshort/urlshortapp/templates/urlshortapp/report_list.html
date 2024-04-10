@@ -1,0 +1,17 @@
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    {% for report in reports %}
+    <tr>
+        <td>{{ report.id }} | {{ report.date_of_report }} | {{ report.suspected_link }} | {{ report.reason }} | {{ report.additional_notes }} | {{ report.status }}</td>
+        <td><a href="{% url 'report-update' report.id %}">Edit</a></td>
+        <td><a href="{% url 'report-delete' report.id %}">Delete</a></td>
+    </tr>
+    {% empty %}
+        <h3>No items in list</h3>
+    {% endfor %}
+</table>

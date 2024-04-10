@@ -3,8 +3,8 @@ import requests
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from .models import Url, ClickStats
-from .forms import ShortenerForm, LoginForm, RegisterForm
+from .models import Url, ClickStats, Report, Support
+from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -39,10 +39,6 @@ def redirect_to_original(request, short_code):
     click_stats.save()
     url.save()
     return redirect(url.original_url)
-
-
-class Index(TemplateView):
-    template_name = "urlshortapp/shortener.html"
 
 
 class CreateShortUrl(CreateView):
@@ -96,7 +92,7 @@ class UrlDetailView(DetailView):
         context = super().get_context_data(**kwargs)
 
         url = self.get_object()
-        click_stats = url.clickstats_set.all()  # Assuming the related_name is 'childmodel_set'
+        click_stats = url.clickstats_set.all()
         context['click_stats'] = click_stats
         return context
 
@@ -111,3 +107,28 @@ class UrlDeleteView(DeleteView):
     model = Url
     context_object_name = 'url'
     success_url = reverse_lazy('urls')
+
+
+class CreateReportView(CreateView):
+    model = Report
+    template_name = "urlshortapp/report_create.html"
+    form_class = ReportForm
+    success_url = reverse_lazy('report-create')
+
+
+class ListReportView(ListView):
+    model = Report
+    context_object_name = 'reports'
+
+
+class ReportUpdateView(UpdateView):
+    model = Report
+    form_class = ReportUpdateForm
+    success_url = reverse_lazy('report-list')
+
+
+class ReportDeleteView(DeleteView):
+    model = Report
+    context_object_name = 'report'
+    success_url = reverse_lazy('report-list')
+
