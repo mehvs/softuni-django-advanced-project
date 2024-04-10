@@ -41,10 +41,6 @@ def redirect_to_original(request, short_code):
     return redirect(url.original_url)
 
 
-class Index(TemplateView):
-    template_name = "urlshortapp/shortener.html"
-
-
 class CreateShortUrl(CreateView):
     model = Url
     template_name = "urlshortapp/shortener.html"
