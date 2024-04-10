@@ -92,7 +92,7 @@ class UrlDetailView(DetailView):
         context = super().get_context_data(**kwargs)
 
         url = self.get_object()
-        click_stats = url.clickstats_set.all()  # Assuming the related_name is 'childmodel_set'
+        click_stats = url.clickstats_set.all()
         context['click_stats'] = click_stats
         return context
 
