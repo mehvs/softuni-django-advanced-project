@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView, CreateView
+from django.views.generic import TemplateView, FormView, CreateView, ListView
 from django.urls import reverse_lazy
 from .models import Url
 from .forms import ShortenerForm, LoginForm, RegisterForm
@@ -59,3 +59,8 @@ class RegisterView(FormView):
         if self.request.user.is_authenticated:
             return redirect('shortener')
         return super(RegisterView, self).get(*args, **kwargs)
+
+
+class UrlListView(ListView):
+    model = Url
+    context_object_name = 'urls'
