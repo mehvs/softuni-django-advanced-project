@@ -64,3 +64,4 @@ class Support(models.Model):
     subject = models.CharField(max_length=255, blank=False, null=False)
     email = models.EmailField(blank=False, null=False)
     description = models.TextField(blank=False, null=False)
+    status = models.CharField(blank=False, null=False, default='Open', choices=STATUS_CHOICES, max_length=20)

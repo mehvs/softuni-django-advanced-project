@@ -1,5 +1,5 @@
 from django import forms
-from .models import Url, User, AbstractUser, Report
+from .models import Url, User, AbstractUser, Report, Support
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 
@@ -30,3 +30,9 @@ class ReportUpdateForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = "__all__"
+
+
+class SupportForm(forms.ModelForm):
+    class Meta:
+        model = Support
+        fields = ['subject', 'email', 'description']

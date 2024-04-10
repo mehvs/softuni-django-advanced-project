@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from .models import Url, ClickStats, Report, Support
-from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm
+from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm, SupportForm
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -131,4 +131,28 @@ class ReportDeleteView(DeleteView):
     model = Report
     context_object_name = 'report'
     success_url = reverse_lazy('report-list')
+
+
+class CreateSupportView(CreateView):
+    model = Report
+    template_name = "urlshortapp/support_create.html"
+    form_class = SupportForm
+    success_url = reverse_lazy('support-create')
+
+
+# class ListReportView(ListView):
+#     model = Report
+#     context_object_name = 'reports'
+#
+#
+# class ReportUpdateView(UpdateView):
+#     model = Report
+#     form_class = ReportUpdateForm
+#     success_url = reverse_lazy('report-list')
+#
+#
+# class ReportDeleteView(DeleteView):
+#     model = Report
+#     context_object_name = 'report'
+#     success_url = reverse_lazy('report-list')
 

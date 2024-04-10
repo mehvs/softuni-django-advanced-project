@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+    <form action="{% url 'logout' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+    </form>
+<form method="POST" action="">
 
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
