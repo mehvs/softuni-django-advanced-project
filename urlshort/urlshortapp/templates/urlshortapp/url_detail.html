@@ -1,0 +1,13 @@
+<h1>Original url: {{ url.original_url }}</h1>
+<h1>Shortened url: </h1><a href="http://127.0.0.1:8000/{{ url.short_code }}">http://127.0.0.1:8000/{{ url.short_code }}</a>
+<h1>Short code: {{ url.short_code }}</h1>
+<h1>Date created: {{ url.created_at}}</h1>
+<h1>Click count: {{ url.click_count}}</h1>
+
+{% for click in click_stats %}
+    <hr>
+    <h1>User agent: {{ click.user_agent }}</h1>
+    <h1>Country code: {{ click.country_code }}</h1>
+    <h1>Click time: {{ click.click_time }}</h1>
+    <hr>
+{% endfor %}
