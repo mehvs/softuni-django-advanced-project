@@ -149,9 +149,9 @@ class SupportUpdateView(UpdateView):
     model = Support
     form_class = SupportUpdateForm
     success_url = reverse_lazy('support-list')
-#
-#
-# class ReportDeleteView(DeleteView):
-#     model = Report
-#     context_object_name = 'report'
-#     success_url = reverse_lazy('report-list')
+
+
+class SupportDeleteView(DeleteView):
+    model = Support
+    context_object_name = 'ticket'
+    success_url = reverse_lazy('support-list')
