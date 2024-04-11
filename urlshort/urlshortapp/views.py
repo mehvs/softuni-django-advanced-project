@@ -41,7 +41,7 @@ def redirect_to_original(request, short_code):
     return redirect(url.original_url)
 
 
-class CreateShortUrl(CreateView):
+class CreateShortUrl(LoginRequiredMixin, CreateView):
     model = Url
     template_name = "urlshortapp/shortener.html"
     form_class = ShortenerForm
@@ -53,7 +53,7 @@ class CreateShortUrl(CreateView):
         return super(CreateShortUrl, self).form_valid(form)
 
 
-class CustomLoginView(LoginView):
+class CustomLoginView(LoginRequiredMixin, LoginView):
     template_name = 'urlshortapp/login.html'
     form_class = LoginForm
 
@@ -79,12 +79,12 @@ class RegisterView(FormView):
         return super(RegisterView, self).get(*args, **kwargs)
 
 
-class UrlListView(ListView):
+class UrlListView(LoginRequiredMixin, ListView):
     model = Url
     context_object_name = 'urls'
 
 
-class UrlDetailView(DetailView):
+class UrlDetailView(LoginRequiredMixin, DetailView):
     model = Url
     context_object_name = 'url'
 
@@ -97,61 +97,61 @@ class UrlDetailView(DetailView):
         return context
 
 
-class UrlUpdateView(UpdateView):
+class UrlUpdateView(LoginRequiredMixin, UpdateView):
     model = Url
     form_class = ShortenerForm
     success_url = reverse_lazy('urls')
 
 
-class UrlDeleteView(DeleteView):
+class UrlDeleteView(LoginRequiredMixin, DeleteView):
     model = Url
     context_object_name = 'url'
     success_url = reverse_lazy('urls')
 
 
-class CreateReportView(CreateView):
+class CreateReportView(LoginRequiredMixin, CreateView):
     model = Report
     template_name = "urlshortapp/report_create.html"
     form_class = ReportForm
     success_url = reverse_lazy('report-create')
 
 
-class ListReportView(ListView):
+class ListReportView(LoginRequiredMixin, ListView):
     model = Report
     context_object_name = 'reports'
 
 
-class ReportUpdateView(UpdateView):
+class ReportUpdateView(LoginRequiredMixin, UpdateView):
     model = Report
     form_class = ReportUpdateForm
     success_url = reverse_lazy('report-list')
 
 
-class ReportDeleteView(DeleteView):
+class ReportDeleteView(LoginRequiredMixin, DeleteView):
     model = Report
     context_object_name = 'report'
     success_url = reverse_lazy('report-list')
 
 
-class CreateSupportView(CreateView):
+class CreateSupportView(LoginRequiredMixin, CreateView):
     model = Report
     template_name = "urlshortapp/support_create.html"
     form_class = SupportForm
     success_url = reverse_lazy('support-create')
 
 
-class ListSupportView(ListView):
+class ListSupportView(LoginRequiredMixin, ListView):
     model = Support
     context_object_name = 'support_tickets'
 
 
-class SupportUpdateView(UpdateView):
+class SupportUpdateView(LoginRequiredMixin, UpdateView):
     model = Support
     form_class = SupportUpdateForm
     success_url = reverse_lazy('support-list')
 
 
-class SupportDeleteView(DeleteView):
+class SupportDeleteView(LoginRequiredMixin, DeleteView):
     model = Support
     context_object_name = 'ticket'
     success_url = reverse_lazy('support-list')
