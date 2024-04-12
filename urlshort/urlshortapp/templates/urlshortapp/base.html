@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>URLShort</title>
+</head>
+<body>
+
+<header>
+    <h1>URLShort</h1>
+    <nav>
+        <a href="{% url 'shortener' %}">Home</a>
+        <a href="{% url 'support-create' %}">Support</a>
+        <a href="{% url 'report-create' %}">Report</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="#" onclick="logout()">Logout</a>
+
+        <script>
+            function logout() {
+
+                let form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "{% url 'logout' %}");
+
+                let csrfToken = document.createElement("input");
+                csrfToken.setAttribute("type", "hidden");
+                csrfToken.setAttribute("name", "csrfmiddlewaretoken");
+                csrfToken.setAttribute("value", "{{ csrf_token }}");
+                form.appendChild(csrfToken);
+
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        </script>
+
+    </nav>
+</header>
+
+<div class="container">
+    {#    <h2>Main Content</h2>#}
+    {#    <p>This is a simple webpage.</p>#}
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    <p>Footer</p>
+</footer>
+
+</body>
+</html>

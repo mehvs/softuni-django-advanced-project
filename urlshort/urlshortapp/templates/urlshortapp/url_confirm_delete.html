@@ -1,6 +1,12 @@
+{% extends 'urlshortapp/base.html' %}
+
+{% block content %}
+
 <a href="{% url 'urls' %}">go back</a>
 <form method="POST">
     {% csrf_token %}
     <p>Are you sure you want to delete this url " http://127.0.0.1:8000/{{ url.short_code }}"</p>
     <input type="submit" value="Delete"/>
 </form>
+
+{% endblock %}

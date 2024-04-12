@@ -41,7 +41,7 @@ def redirect_to_original(request, short_code):
     return redirect(url.original_url)
 
 
-class CreateShortUrl(LoginRequiredMixin, CreateView):
+class CreateShortUrl(CreateView):
     model = Url
     template_name = "urlshortapp/shortener.html"
     form_class = ShortenerForm
@@ -53,7 +53,7 @@ class CreateShortUrl(LoginRequiredMixin, CreateView):
         return super(CreateShortUrl, self).form_valid(form)
 
 
-class CustomLoginView(LoginRequiredMixin, LoginView):
+class CustomLoginView(LoginView):
     template_name = 'urlshortapp/login.html'
     form_class = LoginForm
 

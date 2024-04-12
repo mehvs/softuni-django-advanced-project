@@ -1,3 +1,7 @@
+{% extends 'urlshortapp/base.html' %}
+
+{% block content %}
+
 <h3>URL Form</h3>
 <a href="{% url 'urls' %}">Go back</a>
 <form method="POST" action="">
@@ -5,3 +9,5 @@
     {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
+
+{% endblock %}
