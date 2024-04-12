@@ -60,6 +60,11 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('shortener')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('/')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class RegisterView(FormView):
     template_name = 'urlshortapp/register.html'
