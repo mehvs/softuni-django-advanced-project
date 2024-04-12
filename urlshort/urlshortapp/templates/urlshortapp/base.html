@@ -12,15 +12,38 @@
 <header>
     <h1>URLShort</h1>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="{% url 'shortener' %}">Home</a>
+        <a href="{% url 'support-create' %}">Support</a>
+        <a href="{% url 'report-create' %}">Report</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="#" onclick="logout()">Logout</a>
+
+        <script>
+            function logout() {
+
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "{% url 'logout' %}");
+
+                var csrfToken = document.createElement("input");
+                csrfToken.setAttribute("type", "hidden");
+                csrfToken.setAttribute("name", "csrfmiddlewaretoken");
+                csrfToken.setAttribute("value", "{{ csrf_token }}");
+                form.appendChild(csrfToken);
+
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        </script>
+
     </nav>
 </header>
 
 <div class="container">
-{#    <h2>Main Content</h2>#}
-{#    <p>This is a simple webpage.</p>#}
+    {#    <h2>Main Content</h2>#}
+    {#    <p>This is a simple webpage.</p>#}
     {% block content %}{% endblock %}
 </div>
 
