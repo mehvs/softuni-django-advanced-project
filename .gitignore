@@ -1,2 +1,3 @@
 
 *.sqlite3
+urlshort/db.sqlite3
