@@ -19,6 +19,7 @@
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
         {% else %}
+        <a href="{% url 'urls' %}">URL list</a>
         <a href="#" onclick="logout()">Logout</a>
         {% endif %}
         <script>
