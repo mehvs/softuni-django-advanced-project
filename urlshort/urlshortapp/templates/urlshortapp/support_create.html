@@ -1,5 +1,5 @@
 {% extends 'urlshortapp/base.html' %}
-
+{% load crispy_forms_filters %}
 {% block content %}
 <body>
     <form action="{% url 'logout' %}" method="POST">
@@ -9,7 +9,7 @@
 <form method="POST" action="">
 
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <input type="submit" value="Submit">
 </form>
 </body>

@@ -1,12 +1,12 @@
 {% extends 'urlshortapp/base.html' %}
-
+{% load crispy_forms_filters %}
 {% block content %}
 
 <h3>URL Form</h3>
 <a href="{% url 'urls' %}">Go back</a>
 <form method="POST" action="">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <input type="submit" value="Submit">
 </form>
 
