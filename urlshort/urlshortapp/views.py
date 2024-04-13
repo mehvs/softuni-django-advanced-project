@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, FormView, CreateView, ListView, D
 from django.urls import reverse_lazy
 from .models import Url, ClickStats, Report, Support
 from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm, SupportForm, SupportUpdateForm
-
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
