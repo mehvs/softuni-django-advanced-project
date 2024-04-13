@@ -95,6 +95,12 @@ class UrlListView(LoginRequiredMixin, ListView):
     model = Url
     context_object_name = 'urls'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['urls'] = context['urls'].filter(user=self.request.user)
+
+        return context
+
 
 class UrlDetailView(LoginRequiredMixin, DetailView):
     model = Url
