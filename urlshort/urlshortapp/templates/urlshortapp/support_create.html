@@ -2,10 +2,7 @@
 {% load crispy_forms_filters %}
 {% block content %}
 <body>
-    <form action="{% url 'logout' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="logout">
-    </form>
+
 <form method="POST" action="">
 
     {% csrf_token %}
