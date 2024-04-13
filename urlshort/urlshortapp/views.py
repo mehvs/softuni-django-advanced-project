@@ -60,6 +60,11 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('shortener')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('/')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class RegisterView(FormView):
     template_name = 'urlshortapp/register.html'
@@ -109,7 +114,7 @@ class UrlDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('urls')
 
 
-class CreateReportView(LoginRequiredMixin, CreateView):
+class CreateReportView(CreateView):
     model = Report
     template_name = "urlshortapp/report_create.html"
     form_class = ReportForm
@@ -133,7 +138,7 @@ class ReportDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('report-list')
 
 
-class CreateSupportView(LoginRequiredMixin, CreateView):
+class CreateSupportView(CreateView):
     model = Report
     template_name = "urlshortapp/support_create.html"
     form_class = SupportForm
