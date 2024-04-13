@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, FormView, CreateView, ListView, D
 from django.urls import reverse_lazy
 from .models import Url, ClickStats, Report, Support
 from .forms import ShortenerForm, LoginForm, RegisterForm, ReportForm, ReportUpdateForm, SupportForm, SupportUpdateForm
-
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +14,10 @@ from django.contrib.auth import login
 # Create your views here.
 
 from django.http import HttpResponse
+
+
+def admin_access_denied(request):
+    return render(request, 'urlshortapp/admin_access_denied.html')
 
 
 def redirect_to_original(request, short_code):
@@ -90,6 +94,12 @@ class RegisterView(FormView):
 class UrlListView(LoginRequiredMixin, ListView):
     model = Url
     context_object_name = 'urls'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['urls'] = context['urls'].filter(user=self.request.user)
+
+        return context
 
 
 class UrlDetailView(LoginRequiredMixin, DetailView):

@@ -2,19 +2,33 @@
 
 {% block content %}
 
-<h1>Original url: {{ url.original_url }}</h1>
-<h1>Shortened url: </h1><a
-        href="http://127.0.0.1:8000/{{ url.short_code }}">http://127.0.0.1:8000/{{ url.short_code }}</a>
-<h1>Short code: {{ url.short_code }}</h1>
-<h1>Date created: {{ url.created_at }}</h1>
-<h1>Click count: {{ url.click_count }}</h1>
+    <tr>
+        <td><p>Original url: {{ url.original_url }}</p></td>
+        <td><p>Shortened url: </h1><a
+                href="http://127.0.0.1:8000/{{ url.short_code }}">http://127.0.0.1:8000/{{ url.short_code }}</a></p>
+        <td><p>Short code: {{ url.short_code }}</p></td>
+        <td><p>Date created: {{ url.created_at }}</p></td>
+        <td><p>Click count: {{ url.click_count }}</p></td>
+    </tr>
 
-{% for click in click_stats %}
-    <hr>
-    <h1>User agent: {{ click.user_agent }}</h1>
-    <h1>Country code: {{ click.country_code }}</h1>
-    <h1>Click time: {{ click.click_time }}</h1>
-    <hr>
-{% endfor %}
+    {% for click in click_stats %}
+        <tr>
+            <hr>
+            <td><p>User agent: {{ click.user_agent }}</p></td>
+            <td><p>Country code: {{ click.country_code }}</p></td>
+            <td><p>Click time: {{ click.click_time }}</p></td>
+        </tr>
+    {% endfor %}
+
+    {#{% for click in click_stats %}#}
+    {#<tr>#}
+    {#    <td><a href="http://127.0.0.1:8000/{{ url.short_code }}">http://127.0.0.1:8000/{{ url.short_code }}</a>#}
+    {#    </td>#}
+    {#    <td><a href="{% url 'url' url.id %}">View</a></td>#}
+    {#    <td><a href="{% url 'url-update' url.id %}">Edit</a></td>#}
+    {#    <td><a href="{% url 'url-delete' url.id %}">Delete</a></td>#}
+    {#</tr>#}
+    {##}
+    {#{% endfor %}#}
 
 {% endblock %}

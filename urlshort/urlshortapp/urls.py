@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import CreateShortUrl, redirect_to_original, CustomLoginView, RegisterView, UrlListView, \
     UrlDetailView, UrlUpdateView, UrlDeleteView, CreateReportView, ListReportView, ReportUpdateView, ReportDeleteView, \
-    CreateSupportView, ListSupportView, SupportUpdateView, SupportDeleteView
+    CreateSupportView, ListSupportView, SupportUpdateView, SupportDeleteView, admin_access_denied
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -25,6 +25,8 @@ urlpatterns = [
     path('support-list/', ListSupportView.as_view(), name='support-list'),
     path('support-update/<int:pk>/', SupportUpdateView.as_view(), name='support-update'),
     path('support-delete/<int:pk>/', SupportDeleteView.as_view(), name='support-delete'),
+
+    path('admin-access-denied/', admin_access_denied, name='admin_access_denied'),
 
     path('<str:short_code>/', redirect_to_original, name='redirect'),
 
