@@ -16,6 +16,10 @@ from django.contrib.auth import login
 from django.http import HttpResponse
 
 
+def admin_access_denied(request):
+    return render(request, 'urlshortapp/admin_access_denied.html')
+
+
 def redirect_to_original(request, short_code):
     url = Url.objects.get(short_code=short_code)
     url.click_count += 1
