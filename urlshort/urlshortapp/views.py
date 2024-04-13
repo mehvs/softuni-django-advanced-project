@@ -48,7 +48,10 @@ class CreateShortUrl(CreateView):
     success_url = reverse_lazy('shortener')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        if self.request.user.is_authenticated:
+            form.instance.user = self.request.user
+        else:
+            form.instance.user = None
         form.instance.short_code = Url.short_code
         return super(CreateShortUrl, self).form_valid(form)
 
